@@ -1,9 +1,10 @@
 import winston from "winston";
+import config from "config";
 
 const logger = winston.createLogger({
   level: "info",
   defaultMeta: {
-    serviceName: "<service-name>",
+    serviceName: config.get("kafka.clientId"),
   },
   format: winston.format.combine(
     winston.format.timestamp(),

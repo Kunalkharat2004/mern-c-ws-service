@@ -8,7 +8,7 @@ export const createMessageBroker = (): MessageBroker => {
   console.log("connecting to kafka broker...");
   // singleton
   if (!broker) {
-    broker = new KafkaBroker("<clientid>", [config.get("kafka.broker")]);
+    broker = new KafkaBroker(config.get("kafka.clientId"), config.get("kafka.brokers"));
   }
   return broker;
 };

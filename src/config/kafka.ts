@@ -1,5 +1,6 @@
 import { Consumer, EachMessagePayload, Kafka } from "kafkajs";
 import { MessageBroker } from "../types/broker";
+import ws from "../../src/socket";
 
 export class KafkaBroker implements MessageBroker {
   private consumer: Consumer;
@@ -39,6 +40,16 @@ export class KafkaBroker implements MessageBroker {
           topic,
           partition,
         });
+
+        switch(topic){
+          case "order":{
+            const order = JSON.parse(message.value.toString());
+            ws.io.emit("order-update",order)
+            break;
+          }
+          default:
+            console.log("Do nothing...");
+        }
       },
     });
   }

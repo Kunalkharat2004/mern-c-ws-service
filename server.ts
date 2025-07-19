@@ -15,7 +15,7 @@ const startServer = async () => {
       logger.error("Server error, ",err)
       ws.httpServer.closeAllConnections()
       process.exit(1);
-    })
+    });
     
     // 2) Connect Kafka consumer in “background”
     broker = createMessageBroker();

@@ -3,9 +3,11 @@ import { Server } from "socket.io";
 import config from "config";
 
 const httpServer = createServer();
+const ALLOWED_ORIGINS = config.get<string[]>("allowedOrigins") || [];
+
 const io = new Server(httpServer, {
   cors: {
-    origin: config.get("websocket.origin"),
+    origin: ALLOWED_ORIGINS,
   },
 });
 
